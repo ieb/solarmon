@@ -4,11 +4,11 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/python3 -u solarmon.py
-WorkingDirectory=/home/pi/solarmon
+WorkingDirectory=/home/ieb/solarmon.git
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=pi
+User=ieb
 
 [Install]
 WantedBy=multi-user.target

@@ -15,9 +15,10 @@ settings.read(os.path.dirname(os.path.realpath(__file__)) + '/solarmon.cfg')
 interval = settings.getint('query', 'interval', fallback=1)
 offline_interval = settings.getint('query', 'offline_interval', fallback=60)
 error_interval = settings.getint('query', 'error_interval', fallback=60)
+debug = settings.get('query', 'debug', fallback=0)
+port = settings.get('query', 'port', fallback='/dev/ttyUSB0')
 
 db_name = settings.get('influx', 'db_name', fallback='inverter')
-measurement = settings.get('influx', 'measurement', fallback='inverter')
 
 # Clients
 print('Setup InfluxDB Client... ', end='')
@@ -30,7 +31,6 @@ influx.create_database(db_name)
 print('Done!')
 
 print('Setup Serial Connection... ', end='')
-port = settings.get('solarmon', 'port', fallback='/dev/ttyUSB0')
 client = ModbusClient(method='rtu', port=port, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
 client.connect()
 print('Dome!')
@@ -77,9 +77,9 @@ while True:
                 'measurement': inverter['measurement'],
                 "fields": info
             }]
-
-            print(growatt.name)
-            print(points)
+            if debug == 1:
+                print(growatt.name)
+                print(points)
 
             if not influx.write_points(points, time_precision='s'):
                 print("Failed to write to DB!")
