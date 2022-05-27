@@ -1,10 +1,10 @@
 [Unit]
-Description=Solarmon
+Description=Metermon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 -u solarmon.py
-WorkingDirectory=/home/ieb/solarmon
+ExecStart=/usr/bin/python3 -u metermon.py
+WorkingDirectory=/home/ieb/solarmon/meters
 StandardOutput=inherit
 StandardError=inherit
 Restart=always

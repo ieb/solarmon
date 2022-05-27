@@ -23,9 +23,9 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1652820566597,
+  "graphTooltip": 1,
+  "id": 1,
+  "iteration": 1653392958775,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -108,7 +108,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "datasource": {
@@ -218,7 +218,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -325,7 +325,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -428,7 +428,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -531,7 +531,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -634,7 +634,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -737,7 +737,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -840,7 +840,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -943,7 +943,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -1046,7 +1046,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -1149,7 +1149,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "alias": "",
@@ -1290,7 +1290,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "groupBy": [
@@ -1387,7 +1387,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "datasource": {
@@ -1489,7 +1489,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "datasource": {
@@ -1662,7 +1662,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "targets": [
         {
           "datasource": {
@@ -1739,12 +1739,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1844,11 +1844,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:520",
           "format": "short",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:521",
           "format": "short",
           "logBase": 1,
           "show": true
@@ -1888,12 +1890,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2016,13 +2018,973 @@
         "type": "influxdb",
         "uid": "$datasource"
       },
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 36,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Active Power",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "J1p-ECZgz"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "meter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ActivePower"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Import Export Power",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:105",
+          "decimals": 2,
+          "format": "watt",
+          "label": "",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:106",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "PV1 Voltage (V)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "0"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Vpv1"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "PV2 Voltage (V)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "0"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Vpv2"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "PV Voltage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "PV1 Input Current (A)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "0"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "PV1Curr"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "PV2 Input Current (A)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "0"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "PV2Curr"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "PV Input Current",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "hiddenSeries": false,
+      "id": 37,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Exported Energy",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "J1p-ECZgz"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "meter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ExportActiveEnergy"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Exported energy",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:105",
+          "format": "kwatth",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:106",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "hiddenSeries": false,
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "PV1 Energy Total (kWh)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Epv1_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "PV2 Energy Total (kWh)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Epv2_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "PV Energy Total",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "hiddenSeries": false,
+      "id": 38,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Exported Energy",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "J1p-ECZgz"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "meter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ImportActiveEnergy"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Imported Energy",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:105",
+          "format": "kwatth",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:106",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "hiddenSeries": false,
+      "id": 23,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.5.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Energy Total (kWh)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "EnergyTotal"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "PV Energy Total (kWh)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "/^$measurement$/",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Epv_total"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Energy Total",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 13
+        "y": 34
       },
       "hiddenSeries": false,
       "id": 9,
@@ -2038,12 +3000,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2175,159 +3137,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 13
-      },
-      "hiddenSeries": false,
-      "id": 11,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.5.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "PV1 Voltage (V)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Vpv1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "PV2 Voltage (V)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Vpv2"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "PV Voltage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
         "h": 4,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2343,12 +3156,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2436,159 +3249,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 12,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.5.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "PV1 Input Current (A)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "PV1Curr"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "PV2 Input Current (A)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "PV2Curr"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "PV Input Current",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
         "h": 4,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 27,
@@ -2604,12 +3268,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2734,161 +3398,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 24,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.5.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "PV1 Energy Total (kWh)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Epv1_total"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "PV2 Energy Total (kWh)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Epv2_total"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "PV Energy Total",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 47
       },
       "hiddenSeries": false,
       "id": 32,
@@ -2904,12 +3417,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3077,7 +3590,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 53
       },
       "hiddenSeries": false,
       "id": 26,
@@ -3093,12 +3606,12 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.2",
+      "pluginVersion": "8.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3222,157 +3735,6 @@
       "thresholds": [],
       "timeRegions": [],
       "title": "Reactive Power",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 32
-      },
-      "hiddenSeries": false,
-      "id": 23,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.5.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "Energy Total (kWh)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "EnergyTotal"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "PV Energy Total (kWh)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "none"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "/^$measurement$/",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Epv_total"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Energy Total",
       "tooltip": {
         "shared": true,
         "sort": 0,

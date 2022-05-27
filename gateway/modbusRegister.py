@@ -9,21 +9,26 @@ from datetime import datetime
 # heavilly based on https://github.com/sourceperl/modbus-serial-monitor/blob/master/scripts/modbus-scan-serial
 # because python is not my native language.
 
+SEP = ";"
+PARITY = {'N': serial.PARITY_NONE, 'E': serial.PARITY_EVEN, 'O': serial.PARITY_ODD,
+          'M': serial.PARITY_MARK, 'S': serial.PARITY_SPACE}
+STOP = {'1': serial.STOPBITS_ONE, '1.5': serial.STOPBITS_ONE_POINT_FIVE, '2': serial.STOPBITS_TWO}
 
-class ModbusRegisters:
-    def __init__(self, key, settings ):
+
+class ModbusRegister:
+    def __init__(self, settings ):
         self.request_frame = {}
         self.registers = {}
-        self.baudrate = settings.get(key, 'baudrate', fallback=9600)
-        self.parity = PARITY[settings.get(key, 'parity', fallback='N')]
-        self.stopbits = STOP[settings.get(key, 'stopbits', fallback=1)]
-        self.device = settings.get(key, 'device', fallback=1)
-        self.debug = settings.get(key, 'debug', fallback=False)
+        self.baudrate = settings.get('gateway', 'baudrate', fallback=9600)
+        self.parity = PARITY[settings.get('gateway', 'parity', fallback='N')]
+        self.stopbits = STOP[settings.get('gateway', 'stopbits', fallback='1')]
+        self.device = settings.get('gateway', 'device', fallback='/dev/ttyUSB1')
+        self.debug = settings.get('gateway', 'debug', fallback=0)
 
         # modbus end of frame is a tx silent of [3.5 * byte tx time * 30% margin] seconds
-        self.timeout = (1.0 / baudrate) * 11.0 * 3.5 * 1.3
-        self.timeout = settings.get(key, 'timeout', fallback=self.timeout)
-        self.request_timeout = settings.get(key, 'request_timeout', fallback=self.timeout*64)
+        self.timeout = (1.0 / self.baudrate) * 11.0 * 3.5 * 1.3
+        self.timeout = settings.get('gateway', 'timeout', fallback=self.timeout)
+        self.request_timeout = settings.get('gateway', 'request_timeout', fallback=self.timeout*64)
 
 
     def connect(self):
@@ -78,12 +83,12 @@ class ModbusRegisters:
                 if f_code > 0x80:
                     err_str = "EXCEPT_FRAME"
                     e_code = struct.unpack("B", frame[2:3])[0]
-                self.processFrame(f_code, device_id, frame);
+                self.processRegisters(f_code, device_id, frame);
 
         else:
             err_str = "SHORT_FRAME"
         # send result to stdout
-        if self.debug:
+        if self.debug == 1:
             items = ['DATE=%s' % date, 'ERR=%s' % err_str, 'FRAME=%s' % txt_frame, 'device=%s' % device_id]
             csv_line = SEP.join(items)
             print(csv_line)
@@ -91,24 +96,24 @@ class ModbusRegisters:
 
     def processRegisters(self, f_code, device_id, frame):
         if f_code == 4: # input registers
-
-            if len(frame) == 8 && len(frame) != struct.upack('B', frame[2:3])[0]+3:
+            dataBytes = struct.unpack('B',frame[2:3])[0]
+            if (len(frame) == 8) and (len(frame) != dataBytes+3):
                 # request from master to device
                 self.request_frame[device_id] = {
-                    frame: frame,
-                    start: struct.unpack('<H',frame[2:3]),
-                    count: struct.unpack('<H', frame[4:5]),
-                    recieved: datetime.now()
+                    'frame': frame,
+                    'start': struct.unpack('<H',frame[2:4]),
+                    'count': struct.unpack('<H', frame[4:6]),
+                    'recieved': datetime.now()
                 }
-            else if device_id in self.request_frame:
+                print(self.request_frame[device_id])
+            elif device_id in self.request_frame:
                 # have a request outstanding
-                if ((datetime.now() - self.request_frame[device_id].recieved).total_seconds()) < self.request_timeout:
+                if ((datetime.now() - self.request_frame[device_id]['recieved']).total_seconds()) < self.request_timeout:
                     # frame timeout not reached, process
-                    dataBytes = struct.unpack('B',frame[2:3])[0];
-                    startRegister = self.request_frame[device_id].start;
-                    nRegisters = self.request_frame[device_id].count;
+                    startRegister = self.request_frame[device_id]['start']
+                    nRegisters = self.request_frame[device_id]['count']
                     if dataBytes != nRegisters*2:
-                        print("Warning, not enough bytes returned got "+str(dataBytes)+" expected "+str(nRegisters*2)
+                        print("Warning, not enough bytes returned got "+str(dataBytes)+" expected "+str(nRegisters*2))
 
                     self.extendRegisters(device_id,startRegister+dataBytes+1)
 
@@ -121,7 +126,7 @@ class ModbusRegisters:
 
 
     def extendRegisters(self, device_id, newSize):
-        if !(device_id in self.registers):
+        if not (device_id in self.registers):
             regsize = 0
             newregsize = 4096
         else:
@@ -129,10 +134,11 @@ class ModbusRegisters:
             newregsize = regsize
 
         # need to extend the registers in 4K chunks
-        while newSize > newregsize && newregsize < 0xffff:
+        while newSize > newregsize and newregsize < 0xffff:
             newregsize = newregsize + 4096 
 
         if newregsize > regsize:
+            print("Extending "+str(device_id)+" registers to "+str(newregsize))
             newregisters = bytearray(newregsize)
             if regsize > 0:
                 newregisters[0:regsize] = self.registers[device_id][0:regsize]

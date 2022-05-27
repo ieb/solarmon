@@ -169,6 +169,8 @@ class Growatt:
             return
         self.exportLimitPowerRate = row.registers[0]*0.1
 
+
+
     def print_info(self):
         print('Growatt:')
         print('\tName: ' + str(self.name))

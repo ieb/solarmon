@@ -44,3 +44,35 @@ Systemd Service
 - Run `systemctl start solarmon` to start the service.
 - Run `systemctl status solarmon` and ensure that the service is running correctly.
 - Run `systemctl enable solarmon` to make the service automatically start when the system does.
+
+
+Additonal Monitors
+---
+
+- Gateway
+- Meters
+- Set Export Limits
+
+Gateway
+---
+
+With Modbus its not possible to have 2 controllers on the same physical bus. Gateway sniffs an Modbus bus capturing the conversation between a controler and device and storing the values of the registers in a byte[] which can then be queried and used. This is of use when a meter is connected to a inverter with the inverter operating as the controller, hence only the inverter can query the meter for registers. 
+
+Meters
+---
+
+Queries meters and sends the data to influx. Is currently setup for SDM230 protocol meters sending all available input registers to influx. Accompanied by a systemd service to run as a service.
+
+Set Export Limits
+---
+
+Utility script to query Growatt holding registers. This also sets the export limit and export fail limit on the inverter assumign that the inverter is not locked. It has been tested and works on a Growatt 4200 LT XE believed to have been manufactured in 2021. The register locations do change, but if this reports meaningful values when querying there is a good chance the registers on a different unit are the same. It will operate in dry run mode making no changes unless invoked as
+
+```
+python setExportLimit.py set
+```
+
+
+
+
+
