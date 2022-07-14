@@ -2,7 +2,8 @@
 
 
 #
-#Input registers
+#Input registers,
+# each register is a 2 byte so multiply the register number by 2 to get the offset
 SDM230Registers = {
     'LineToNeutral':            0x000,  #30001,Line to neutral volts.,Volts,0x0000
     'Current':                  0x0006, #30007,Current.,Amps,0x0006
@@ -10,8 +11,11 @@ SDM230Registers = {
     'ApparentPower':            0x0012, #30019,Apparent power,VoltAmps,0x0012
     'ReactivePower':            0x0018, #30025.Reactive power,VAr,0x0018
     'PowerFactor':              0x001E, #30031, #Power factor,None,0x001E
+
     'PhaseAngle':               0x0024, #30037,Phase angle.,Degree,0x0024
     'Frequency':                0x0046, #30071,Frequency,Hz,0x0046
+
+
     'ImportActiveEnergy':       0x0048, #30073,Import active energy,kwh,0x0048
     'ExportActiveEnergy':       0x004A, #30075,Export active energy,kwh,0x004A
     'ImportReactiveEnergy':     0x004C, #30077,Import reactive energy,kvarh,0x004C
@@ -32,6 +36,7 @@ SDM230Registers = {
 
 
 
+
 class SDM230:
     def __init__(self, modbusRegister, unit):
         self.modbusRegister = modbusRegister
@@ -39,32 +44,31 @@ class SDM230:
 
 
     def read(self):
-
         return {
-            LineToNeutral: self.modbusRegister.readFloat( self.unit, SDM230Registers['LineToNeutral']),
-            Current: self.modbusRegister.readFloat( self.unit, SDM230Registers['Current']),
-            ActivePower: self.modbusRegister.readFloat( self.unit, SDM230Registers['ActivePower']),
-            ApparentPower: self.modbusRegister.readFloat( self.unit, SDM230Registers['ApparentPower']),
-            ReactivePower: self.modbusRegister.readFloat( self.unit, SDM230Registers['ReactivePower']),
-            PowerFactor: self.modbusRegister.readFloat( self.unit, SDM230Registers['PowerFactor']),
-            PhaseAngle: self.modbusRegister.readFloat( self.unit, SDM230Registers['PhaseAngle']),
-            Frequency: self.modbusRegister.readFloat( self.unit, SDM230Registers['Frequency']),
-            ImportActiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ImportActiveEnergy']),
-            ExportActiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ExportActiveEnergy']),
-            ImportReactiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ImportReactiveEnergy']),
-            ExportReactiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ExportReactiveEnergy']),
-            TotalW: self.modbusRegister.readFloat( self.unit, SDM230Registers['TotalW']),
-            MaximumTotalW: self.modbusRegister.readFloat( self.unit, SDM230Registers['MaximumTotalW']),
-            ImportW: self.modbusRegister.readFloat( self.unit, SDM230Registers['ImportW']),
-            MaximimImportW: self.modbusRegister.readFloat( self.unit, SDM230Registers['MaximimImportW']),
-            ExportW: self.modbusRegister.readFloat( self.unit, SDM230Registers['ExportW']),
-            MaximumExportW: self.modbusRegister.readFloat( self.unit, SDM230Registers['MaximumExportW']),
-            CurrentA: self.modbusRegister.readFloat( self.unit, SDM230Registers['CurrentA']),
-            MaximumCurrentA: self.modbusRegister.readFloat( self.unit, SDM230Registers['MaximumCurrentA']),
-            TotalActiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['TotalActiveEnergy']),
-            TotalReactiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['TotalReactiveEnergy']),
-            ResetableActiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ResetableActiveEnergy']),
-            ResettableReactiveEnergy: self.modbusRegister.readFloat( self.unit, SDM230Registers['ResetableActiveEnergy']),
+            'LineToNeutral': self.modbusRegister.getFloat( self.unit, SDM230Registers['LineToNeutral']),
+            'Current': self.modbusRegister.getFloat( self.unit, SDM230Registers['Current']),
+            'ActivePower': self.modbusRegister.getFloat( self.unit, SDM230Registers['ActivePower']),
+            'ApparentPower': self.modbusRegister.getFloat( self.unit, SDM230Registers['ApparentPower']),
+            'ReactivePower': self.modbusRegister.getFloat( self.unit, SDM230Registers['ReactivePower']),
+            'PowerFactor': self.modbusRegister.getFloat( self.unit, SDM230Registers['PowerFactor']),
+            'PhaseAngle': self.modbusRegister.getFloat( self.unit, SDM230Registers['PhaseAngle']),
+            'Frequency': self.modbusRegister.getFloat( self.unit, SDM230Registers['Frequency']),
+            'ImportActiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ImportActiveEnergy']),
+            'ExportActiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ExportActiveEnergy']),
+            'ImportReactiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ImportReactiveEnergy']),
+            'ExportReactiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ExportReactiveEnergy']),
+            'TotalW': self.modbusRegister.getFloat( self.unit, SDM230Registers['TotalW']),
+            'MaximumTotalW': self.modbusRegister.getFloat( self.unit, SDM230Registers['MaximumTotalW']),
+            'ImportW': self.modbusRegister.getFloat( self.unit, SDM230Registers['ImportW']),
+            'MaximimImportW': self.modbusRegister.getFloat( self.unit, SDM230Registers['MaximimImportW']),
+            'ExportW': self.modbusRegister.getFloat( self.unit, SDM230Registers['ExportW']),
+            'MaximumExportW': self.modbusRegister.getFloat( self.unit, SDM230Registers['MaximumExportW']),
+            'CurrentA': self.modbusRegister.getFloat( self.unit, SDM230Registers['CurrentA']),
+            'MaximumCurrentA': self.modbusRegister.getFloat( self.unit, SDM230Registers['MaximumCurrentA']),
+            'TotalActiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['TotalActiveEnergy']),
+            'TotalReactiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['TotalReactiveEnergy']),
+            'ResetableActiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ResetableActiveEnergy']),
+            'ResettableReactiveEnergy': self.modbusRegister.getFloat( self.unit, SDM230Registers['ResetableActiveEnergy']),
         }
 
 

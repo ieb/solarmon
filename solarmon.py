@@ -6,6 +6,7 @@ import os
 from configparser import RawConfigParser
 from influxdb import InfluxDBClient
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
+from os.path import exists
 
 from growatt import Growatt
 
@@ -18,17 +19,29 @@ error_interval = settings.getint('query', 'error_interval', fallback=60)
 debug = settings.get('query', 'debug', fallback=0)
 port = settings.get('query', 'port', fallback='/dev/ttyUSB0')
 
+while not exists(port):
+    print("Waiting for ", port);
+    time.sleep(5)
+
+
 db_name = settings.get('influx', 'db_name', fallback='inverter')
 
 # Clients
-print('Setup InfluxDB Client... ', end='')
-influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
-                        port=settings.getint('influx', 'port', fallback=8086),
-                        username=settings.get('influx', 'username', fallback=None),
-                        password=settings.get('influx', 'password', fallback=None),
-                        database=db_name)
-influx.create_database(db_name)
-print('Done!')
+influxPending = True
+while influxPending:
+    try:
+        print('Setup InfluxDB Client... ', end='')
+        influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
+                                port=settings.getint('influx', 'port', fallback=8086),
+                                username=settings.get('influx', 'username', fallback=None),
+                                password=settings.get('influx', 'password', fallback=None),
+                                database=db_name)
+        influx.create_database(db_name)
+        print('Done!')
+        influxPending = False
+    except:
+        print('Failed to connect to Influx')
+        time.sleep(10)
 
 print('Setup Serial Connection... ', end='')
 client = ModbusClient(method='rtu', port=port, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)

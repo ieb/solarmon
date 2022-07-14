@@ -21,18 +21,29 @@ if __name__ == '__main__':
     settings.read(os.path.dirname(os.path.realpath(__file__)) + '/gateway.cfg')
 
     error_interval = settings.getint('gateway', 'error_interval', fallback=60)
+    debug = settings.getint('gateway', 'debug', fallback=0)
 
 
     print('Setup InfluxDB Client... ', end='')
     db_name = settings.get('influx', 'db_name', fallback='inverter')
 
-    influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
-                    port=settings.getint('influx', 'port', fallback=8086),
-                    username=settings.get('influx', 'username', fallback=None),
-                    password=settings.get('influx', 'password', fallback=None),
-                    database=db_name)
-    influx.create_database(db_name)
-    print('Done!')
+
+    influxPending = True
+    while influxPending:
+        try:
+            print('Setup InfluxDB Client... ', end='')
+            influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
+                                    port=settings.getint('influx', 'port', fallback=8086),
+                                    username=settings.get('influx', 'username', fallback=None),
+                                    password=settings.get('influx', 'password', fallback=None),
+                                    database=db_name)
+            influx.create_database(db_name)
+            print('Done!')
+            influxPending = False
+        except:
+            print('Failed to connect to Influx')
+            time.sleep(10)
+
 
 
     modbus = ModbusRegister(settings);
@@ -73,18 +84,18 @@ if __name__ == '__main__':
         points = []
         now = time.time()
         for device in devices:
-            if now > device.nextUpdate:
-                device.nextUpdate = device.nextUpdate + interval
-                info = device.deviceProcessor.read()
+            if now > device['nextUpdate']:
+                device['nextUpdate'] = now + interval
+                info = device['deviceProcessor'].read()
                 points.append({
                     'time': int(now),
-                    'measurement': device.measurement,
+                    'measurement': device['measurement'],
                     "fields": info,
                     })
 
         if len(points) > 0:
             if debug == 1:
-                print(point)
+                print(points)
             if not influx.write_points(points, time_precision='s'):
                 print("Failed to write to DB!")
 

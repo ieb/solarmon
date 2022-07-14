@@ -168,6 +168,39 @@ print("Longitude:", row.registers[0])
 
 
 if (len(sys.argv) > 1) and (sys.argv[1] == 'set'):
+    if ( len(sys.argv) > 2):
+        power = int(int(sys.argv[2])*1000/4200)
+    else:
+        power =876
+    print("Set Export Power Limit")
+    row = client.write_register(123, value=power, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(123, count=2, unit=unit)
+    exportLimitPowerRate = row.registers[0]*0.1
+    print("Export Power Limit:", exportLimitPowerRate)
+    row = client.write_register(123, value=power, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(123, count=2, unit=unit)
+    exportLimitPowerRate = row.registers[0]*0.001*4200
+    print("Export Power Limit:", exportLimitPowerRate)
+
+
+    row = client.write_register(3000, value=power, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(3000, count=1, unit=unit)
+    g100FailSafeRate  = row.registers[0]*0.001*4200
+    print("Export Power Failsafe Limit:", g100FailSafeRate)
+
+    row = client.write_register(122, value=1, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(122, count=1, unit=unit)
+    print("Export Limit type 0=disabled, 1=rs485, 2=rs233 to:", row.registers[0])
+
+    row = client.write_register(42, value=1, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(42, count=1, unit=unit)
+    print("Export Limit Fail Safe  1=enabled, 0=disabled:", row.registers[0])
+elif (len(sys.argv) > 1) and (sys.argv[1] == 'clear'):
     print("Set Export Power Limit")
     row = client.write_register(123, value=876, unit=unit)
     print("Response", row)
@@ -182,10 +215,47 @@ if (len(sys.argv) > 1) and (sys.argv[1] == 'set'):
 
 
     row = client.write_register(3000, value=876, unit=unit)
+    print("Response", row)
     row = client.read_holding_registers(3000, count=1, unit=unit)
     g100FailSafeRate  = row.registers[0]*0.1
     print("Export Power Failsafe Limit:", g100FailSafeRate)
+
+    row = client.write_register(122, value=0, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(122, count=1, unit=unit)
+    print("Export Limit type 0=disabled, 1=rs485, 2=rs233 to:", row.registers[0])
+
+    row = client.write_register(42, value=0, unit=unit)
+    print("Response", row)
+    row = client.read_holding_registers(42, count=1, unit=unit)
+    print("Export Limit Fail Safe  1=enabled, 0=disabled:", row.registers[0])
+
 else:
+    print("Checking dry run")
+    if (len(sys.argv) > 1) and (sys.argv[1] == 'dry'):
+        if ( len(sys.argv) > 2):
+            power = int(int(sys.argv[2])*1000/4200)
+        else:
+            power = 876
+        print("Would have set power limit to ", power)
+
+    row = client.read_holding_registers(123, count=2, unit=unit)
+    exportLimitPowerRate = row.registers[0]*0.1
+    print("Export Power Limit:", exportLimitPowerRate)
+    row = client.read_holding_registers(123, count=2, unit=unit)
+    exportLimitPowerRate = row.registers[0]*0.001*4200
+    print("Export Power Limit:", exportLimitPowerRate)
+
+
+    row = client.read_holding_registers(3000, count=1, unit=unit)
+    g100FailSafeRate  = row.registers[0]*0.001*4200
+    print("Export Power Failsafe Limit:", g100FailSafeRate)
+
+    row = client.read_holding_registers(122, count=1, unit=unit)
+    print("Export Limit type 0=disabled, 1=rs485, 2=rs233 to:", row.registers[0])
+
+    row = client.read_holding_registers(42, count=1, unit=unit)
+    print("Export Limit Fail Safe  1=enabled, 0=disabled:", row.registers[0])
     print("Dry run, use ./setExportLimit.py set to update export limits  ")
 
 

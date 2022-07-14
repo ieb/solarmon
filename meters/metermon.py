@@ -2,6 +2,7 @@
 
 import time
 import os
+from os.path import exists
 
 from configparser import RawConfigParser
 from influxdb import InfluxDBClient
@@ -20,15 +21,26 @@ port = settings.get('query', 'port', fallback='/dev/ttyUSB0')
 
 db_name = settings.get('influx', 'db_name', fallback='inverter')
 
+while not exists(port):
+    print("Waiting for ", port);
+    time.sleep(5)
+
 # Clients
-print('Setup InfluxDB Client... ', end='')
-influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
-                        port=settings.getint('influx', 'port', fallback=8086),
-                        username=settings.get('influx', 'username', fallback=None),
-                        password=settings.get('influx', 'password', fallback=None),
-                        database=db_name)
-influx.create_database(db_name)
-print('Done!')
+influxPending = True
+while influxPending:
+    try:
+        print('Setup InfluxDB Client... ', end='')
+        influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
+                                port=settings.getint('influx', 'port', fallback=8086),
+                                username=settings.get('influx', 'username', fallback=None),
+                                password=settings.get('influx', 'password', fallback=None),
+                                database=db_name)
+        influx.create_database(db_name)
+        print('Done!')
+        influxPending = False
+    except:
+        print('Failed to connect to Influx')
+        time.sleep(10)
 
 print('Setup Serial Connection... ', end='')
 client = ModbusClient(method='rtu', port=port, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)

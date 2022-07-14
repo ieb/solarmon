@@ -1,0 +1,14 @@
+[Unit]
+Description=Gateway
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u modbusGateway.py
+WorkingDirectory=/home/ieb/solarmon/gateway
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=ieb
+
+[Install]
+WantedBy=multi-user.target
