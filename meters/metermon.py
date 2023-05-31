@@ -2,6 +2,8 @@
 
 import time
 import os
+sys.path.append('../lib')
+
 from os.path import exists
 
 from configparser import RawConfigParser
@@ -19,7 +21,7 @@ error_interval = settings.getint('query', 'error_interval', fallback=60)
 debug = settings.get('query', 'debug', fallback=0)
 port = settings.get('query', 'port', fallback='/dev/ttyUSB0')
 
-db_name = settings.get('influx', 'db_name', fallback='inverter')
+db_name = settings.get('influx', 'db_name', fallback='none')
 
 while not exists(port):
     print("Waiting for ", port);
@@ -27,20 +29,21 @@ while not exists(port):
 
 # Clients
 influxPending = True
-while influxPending:
-    try:
-        print('Setup InfluxDB Client... ', end='')
-        influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
-                                port=settings.getint('influx', 'port', fallback=8086),
-                                username=settings.get('influx', 'username', fallback=None),
-                                password=settings.get('influx', 'password', fallback=None),
-                                database=db_name)
-        influx.create_database(db_name)
-        print('Done!')
-        influxPending = False
-    except:
-        print('Failed to connect to Influx')
-        time.sleep(10)
+if db_name != 'none':
+    while influxPending:
+        try:
+            print('Setup InfluxDB Client... ', end='')
+            influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
+                                    port=settings.getint('influx', 'port', fallback=8086),
+                                    username=settings.get('influx', 'username', fallback=None),
+                                    password=settings.get('influx', 'password', fallback=None),
+                                    database=db_name)
+            influx.create_database(db_name)
+            print('Done!')
+            influxPending = False
+        except:
+            print('Failed to connect to Influx')
+            time.sleep(10)
 
 print('Setup Serial Connection... ', end='')
 client = ModbusClient(method='rtu', port=port, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
@@ -56,7 +59,7 @@ for section in settings.sections():
         continue
 
     print("Adding")
-    name = section[10:]
+    name = section[7:]
     unit = int(settings.get(section, 'unit'))
     measurement = settings.get(section, 'measurement')
     meter = SDM230Meter(client=client, name=name, unit=unit)
@@ -93,12 +96,13 @@ while True:
                 'measurement': meter['measurement'],
                 "fields": info
             }]
-            if debug == 1:
+            if debug == '1':
                 print(sdm230.name)
                 print(points)
 
-            if not influx.write_points(points, time_precision='s'):
-                print("Failed to write to DB!")
+            if not influxPending:
+                if not influx.write_points(points, time_precision='s'):
+                    print("Failed to write to DB!")
         except Exception as err:
             print(sdm230.name)
             print(err)

@@ -2,6 +2,10 @@
 
 import time
 import os
+import sys
+import traceback
+
+sys.path.append('./lib')
 
 from configparser import RawConfigParser
 from influxdb import InfluxDBClient
@@ -9,6 +13,9 @@ from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 from os.path import exists
 
 from growatt import Growatt
+from metricsRecorder import MetricsRecorder
+
+
 
 settings = RawConfigParser()
 settings.read(os.path.dirname(os.path.realpath(__file__)) + '/solarmon.cfg')
@@ -17,36 +24,22 @@ interval = settings.getint('query', 'interval', fallback=1)
 offline_interval = settings.getint('query', 'offline_interval', fallback=60)
 error_interval = settings.getint('query', 'error_interval', fallback=60)
 debug = settings.get('query', 'debug', fallback=0)
+if not os.environ.get('DEBUG') == None:
+    debug = os.environ.get('DEBUG')
 port = settings.get('query', 'port', fallback='/dev/ttyUSB0')
 
 while not exists(port):
     print("Waiting for ", port);
     time.sleep(5)
 
+recorder = MetricsRecorder(settings)
 
-db_name = settings.get('influx', 'db_name', fallback='inverter')
 
-# Clients
-influxPending = True
-while influxPending:
-    try:
-        print('Setup InfluxDB Client... ', end='')
-        influx = InfluxDBClient(host=settings.get('influx', 'host', fallback='localhost'),
-                                port=settings.getint('influx', 'port', fallback=8086),
-                                username=settings.get('influx', 'username', fallback=None),
-                                password=settings.get('influx', 'password', fallback=None),
-                                database=db_name)
-        influx.create_database(db_name)
-        print('Done!')
-        influxPending = False
-    except:
-        print('Failed to connect to Influx')
-        time.sleep(10)
 
 print('Setup Serial Connection... ', end='')
 client = ModbusClient(method='rtu', port=port, baudrate=9600, stopbits=1, parity='N', bytesize=8, timeout=1)
 client.connect()
-print('Dome!')
+print('Done!')
 
 print('Loading inverters... ')
 inverters = []
@@ -84,19 +77,18 @@ while True:
 
             # Mark that at least one inverter is online so we should continue collecting data
             online = True
+            recorder.add(now, inverter['measurement'], info, interval,[])
+            tosend = True
 
-            points = [{
-                'time': int(now),
-                'measurement': inverter['measurement'],
-                "fields": info
-            }]
-            if debug == 1:
-                print(growatt.name)
-                print(points)
+            if tosend:
+                recorder.send()
+                if debug == 1:
+                    print(growatt.name)
+                    print(info)
 
-            if not influx.write_points(points, time_precision='s'):
-                print("Failed to write to DB!")
+
         except Exception as err:
+            traceback.print_exc()
             print(growatt.name)
             print(err)
             inverter['error_sleep'] = error_interval

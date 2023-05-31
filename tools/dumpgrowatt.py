@@ -7,7 +7,7 @@ from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 from pymodbus.exceptions import ModbusIOException
 
 settings = RawConfigParser()
-settings.read(os.path.dirname(os.path.realpath(__file__)) + '/solarmon.cfg')
+settings.read(os.path.dirname(os.path.realpath(__file__)) + '../solarmon.cfg')
 
 port = settings.get('query', 'port', fallback='/dev/ttyUSB1')
 
