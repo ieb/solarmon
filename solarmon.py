@@ -4,6 +4,7 @@ import time
 import os
 import sys
 import traceback
+import json
 
 sys.path.append('./lib')
 
@@ -14,6 +15,8 @@ from os.path import exists
 
 from growatt import Growatt
 from metricsRecorder import MetricsRecorder
+from modbusMetrics import ModbusMetrics
+from calcExportLimit import ExportLimitCalc
 
 
 
@@ -32,7 +35,9 @@ while not exists(port):
     print("Waiting for ", port);
     time.sleep(5)
 
-recorder = MetricsRecorder(settings)
+metrics = ModbusMetrics(settings)
+recorder = MetricsRecorder(settings, metrics)
+exportCalc = ExportLimitCalc(settings)
 
 
 
@@ -50,12 +55,17 @@ for section in settings.sections():
     name = section[10:]
     unit = int(settings.get(section, 'unit'))
     measurement = settings.get(section, 'measurement')
+    limits = json.loads(settings.get(section, 'limits', fallback="[[4,500],[4.5,1000],[5,2000]]"))
+    exportEvaluatePeriod = int(settings.get(section, 'exportEvaluatePeriod', fallback=900))
     growatt = Growatt(client, name, unit)
     growatt.print_info()
     inverters.append({
         'error_sleep': 0,
         'growatt': growatt,
-        'measurement': measurement
+        'measurement': measurement,
+        'limits': limits,
+        'exportEvaluatePeriod': exportEvaluatePeriod,
+        'lastExportEvaluate': 0
     })
 print('Done!')
 
@@ -86,8 +96,28 @@ while True:
                     print(growatt.name)
                     print(info)
 
+            metrics.report(recorder)
+
+            if now > inverter['lastExportEvaluate'] + inverter['exportEvaluatePeriod']:     
+                inverter['lastExportEvaluate'] = now
+                exportCalc.load("gateway", 'gatewayData')
+                endOfPeriod = (time.time())
+                startOfPeriod = (endOfPeriod - (7*24*3600))
+                exportCalculations = exportCalc.analyse(startOfPeriod, endOfPeriod)
+                print(f'export calcs {json.dumps(exportCalculations)}')
+                limitSet = False
+                for limit in inverter['limits']:                
+                    if exportCalculations['kwh'] < limit[0]:
+                        growatt.setExportLimit(limit[1])
+                        limitSet = True
+                        break;
+                if not limitSet:
+                    growatt.setExportLimit(4200)
+
+
 
         except Exception as err:
+            metrics.inc('main.exceptions')
             traceback.print_exc()
             print(growatt.name)
             print(err)
